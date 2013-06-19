@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building from Source &mdash; OpenXC CAN Translator 3.3-dev documentation</title>
+    <title>Building from Source &mdash; OpenXC CAN Translator 4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '3.3-dev',
+        VERSION:     '4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="OpenXC CAN Translator 3.3-dev documentation" href="../index.html" />
+    <link rel="top" title="OpenXC CAN Translator 4.0 documentation" href="../index.html" />
     <link rel="up" title="Installation" href="installation.html" />
     <link rel="next" title="Testing" href="testing.html" />
     <link rel="prev" title="Flashing a Pre-compiled Binary" href="binary.html" /> 
@@ -43,7 +41,7 @@
         <li class="right" >
           <a href="binary.html" title="Flashing a Pre-compiled Binary"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li>
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li>
           <li><a href="installation.html" accesskey="U">Installation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -66,15 +64,14 @@ platform, see the <a class="reference internal" href="../platforms/platforms.htm
 </pre></div>
 </div>
 <dl class="docutils">
-<dt><tt class="docutils literal"><span class="pre">DEBUG</span></tt> - Set to <tt class="docutils literal"><span class="pre">1</span></tt> to compile with debugging symbols and to enable debug</dt>
-<dd>logging over <a class="reference internal" href="../output/uart.html"><em>UART</em></a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">DEBUG</span></tt> - Set to <tt class="docutils literal"><span class="pre">1</span></tt> to compile with debugging symbols and to enable</dt>
+<dd>debug logging. See the <a class="reference internal" href="../platforms/platforms.html"><em>platform docs</em></a> for
+details on how to read this output.</dd>
 <dt><tt class="docutils literal"><span class="pre">PLATFORM</span></tt> - Select the target <a class="reference internal" href="../platforms/platforms.html"><em>microcontroller platform</em></a></dt>
 <dd>(see the platform specific pages for valid options).</dd>
 </dl>
-<p><tt class="docutils literal"><span class="pre">UART</span></tt> - By default, UART output of OpenXC vehicle data is disabled. Set this
-to <tt class="docutils literal"><span class="pre">1</span></tt> to enable <a class="reference internal" href="../output/uart.html"><em>UART</em></a> output.</p>
-<p><tt class="docutils literal"><span class="pre">ETHERNET</span></tt> - By default, TCP output of OpenXC vehicle data is disabled. Set
-this to <tt class="docutils literal"><span class="pre">1</span></tt> to enable TCP output on boards that have an Ethernet interface (only
+<p><tt class="docutils literal"><span class="pre">NETWORK</span></tt> - By default, TCP output of OpenXC vehicle data is disabled. Set
+this to <tt class="docutils literal"><span class="pre">1</span></tt> to enable TCP output on boards that have an Network interface (only
 the chipKIT Max32 right now).</p>
 <p><tt class="docutils literal"><span class="pre">BOOTLOADER</span></tt> - By default, the firmware is built to run on a microcontroller
 with a <a class="reference internal" href="bootloaders.html"><em>bootloader</em></a>, allowing you to update the firmware
@@ -96,7 +93,7 @@ there are no modified files in the working directory.</li>
 <li>Did you download the .zip file of the <tt class="docutils literal"><span class="pre">cantranslator</span></tt> project from
 GitHub? Use git to clone the repository instead - the library dependencies
 are stored as git submodules and do not work when using the zip file.</li>
-<li>If you get a lot of errors about <tt class="docutils literal"><span class="pre">undefined</span> <span class="pre">refernece</span> <span class="pre">to</span> <span class="pre">getSignals()'</span></tt> and
+<li>If you get a lot of errors about <tt class="docutils literal"><span class="pre">undefined</span> <span class="pre">reference</span> <span class="pre">to</span> <span class="pre">getSignals()'</span></tt> and
 other functions, you need to make sure you defined your CAN messages - read
 through <a class="reference internal" href="../definitions/definitions.html"><em>CAN Message Definition</em></a> before trying to compile.</li>
 </ul>
@@ -158,13 +155,13 @@ through <a class="reference internal" href="../definitions/definitions.html"><em
         <li class="right" >
           <a href="binary.html" title="Flashing a Pre-compiled Binary"
              >previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li>
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li>
           <li><a href="installation.html" >Installation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Christopher Peplin.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

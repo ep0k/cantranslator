@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Supported Platforms &mdash; OpenXC CAN Translator 3.3-dev documentation</title>
+    <title>Supported Platforms &mdash; OpenXC CAN Translator 4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '3.3-dev',
+        VERSION:     '4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="OpenXC CAN Translator 3.3-dev documentation" href="../index.html" />
+    <link rel="top" title="OpenXC CAN Translator 4.0 documentation" href="../index.html" />
     <link rel="next" title="NGX Blueboard LPC1768-H" href="blueboard.html" />
     <link rel="prev" title="Dependencies" href="../installation/dependencies.html" /> 
   </head>
@@ -42,7 +40,7 @@
         <li class="right" >
           <a href="../installation/dependencies.html" title="Dependencies"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -69,8 +67,23 @@ micro architecture and a board variant.</li>
 <p>Two PIC32 boards are supported:</p>
 <ul class="simple">
 <li><a class="reference internal" href="max32.html"><em>Digilent chipKIT Max32</em></a></li>
-<li>FleetCarma Data Logger</li>
+<li><a class="reference internal" href="fleetcarma.html"><em>FleetCarma Data Logger</em></a></li>
 </ul>
+<div class="section" id="troubleshooting-pic32-boards">
+<h3>Troubleshooting PIC32 Boards<a class="headerlink" href="#troubleshooting-pic32-boards" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>No data received over USB?</dt>
+<dd>If you have UART enabled for a while, then disconnect the UART receiver
+(i.e. pull the status pin low and stop touching RTS/CTS), it can cause the
+firmware to block trying to write data to UART. Power cycle the board or
+leave the UART receiver attached even if nobody is reading data (i.e. keep
+the CTS/RTS lines active).</dd>
+<dt>USB data arriving in bursts?</dt>
+<dd>Are you also reading data over UART, or do you have something pulling the
+UART connect pin high? It&#8217;s not always possible to read both USB and UART at
+full data rates at the same time.</dd>
+</dl>
+</div>
 </div>
 <div class="section" id="lpc176x">
 <h2>LPC176x<a class="headerlink" href="#lpc176x" title="Permalink to this headline">¶</a></h2>
@@ -92,7 +105,10 @@ micro architecture and a board variant.</li>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Supported Platforms</a><ul>
-<li><a class="reference internal" href="#pic32">PIC32</a></li>
+<li><a class="reference internal" href="#pic32">PIC32</a><ul>
+<li><a class="reference internal" href="#troubleshooting-pic32-boards">Troubleshooting PIC32 Boards</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#lpc176x">LPC176x</a><ul>
 </ul>
 </li>
@@ -140,12 +156,12 @@ micro architecture and a board variant.</li>
         <li class="right" >
           <a href="../installation/dependencies.html" title="Dependencies"
              >previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Christopher Peplin.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

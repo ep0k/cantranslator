@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CAN Message Definition &mdash; OpenXC CAN Translator 3.3-dev documentation</title>
+    <title>CAN Message Definition &mdash; OpenXC CAN Translator 4.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '3.3-dev',
+        VERSION:     '4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="OpenXC CAN Translator 3.3-dev documentation" href="../index.html" />
+    <link rel="top" title="OpenXC CAN Translator 4.0 documentation" href="../index.html" />
     <link rel="next" title="JSON Mapping Format" href="mappings.html" />
     <link rel="prev" title="Digilent chipKIT Max32" href="../platforms/max32.html" /> 
   </head>
@@ -42,7 +40,7 @@
         <li class="right" >
           <a href="../platforms/max32.html" title="Digilent chipKIT Max32"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,89 +51,91 @@
             
   <div class="section" id="can-message-definition">
 <h1>CAN Message Definition<a class="headerlink" href="#can-message-definition" title="Permalink to this headline">¶</a></h1>
-<p>Once the libraries are installed and you run <tt class="docutils literal"><span class="pre">make</span></tt>, you&#8217;ll notice
-that it won&#8217;t compile - you&#8217;ll get a bunch of errors that look like
-this:</p>
-<div class="highlight-sh"><div class="highlight"><pre>build-cli/canutil_chipkit.o: In <span class="k">function</span> <span class="sb">`</span>initializeCan<span class="o">(</span>CanBus*<span class="o">)</span><span class="s1">&#39;:</span>
-<span class="s1">canutil_chipkit.cpp:(.text._Z13initializeCanP6CanBus+0xb8): undefined reference to `initializeFilterMasks(unsigned long long, int*)&#39;</span>
-canutil_chipkit.cpp:<span class="o">(</span>.text._Z13initializeCanP6CanBus+0xcc<span class="o">)</span>: undefined reference to <span class="sb">`</span>initializeFilters<span class="o">(</span>unsigned long long, int*<span class="o">)</span><span class="s1">&#39;</span>
-<span class="s1">build-cli/cantranslator.o: In function `receiveWriteRequest(char*)&#39;</span>:
-cantranslator.cpp:<span class="o">(</span>.text._Z19receiveWriteRequestPc+0x40<span class="o">)</span>: undefined reference to <span class="sb">`</span>getSignals<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">cantranslator.cpp:(.text._Z19receiveWriteRequestPc+0x48): undefined reference to `getSignalCount()&#39;</span>
-cantranslator.cpp:<span class="o">(</span>.text._Z19receiveWriteRequestPc+0x7c<span class="o">)</span>: undefined reference to <span class="sb">`</span>getCommands<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">cantranslator.cpp:(.text._Z19receiveWriteRequestPc+0x84): undefined reference to `getCommandCount()&#39;</span>
-cantranslator.cpp:<span class="o">(</span>.text._Z19receiveWriteRequestPc+0xa4<span class="o">)</span>: undefined reference to <span class="sb">`</span>getSignals<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">cantranslator.cpp:(.text._Z19receiveWriteRequestPc+0xac): undefined reference to `getSignalCount()&#39;</span>
-cantranslator.cpp:<span class="o">(</span>.text._Z19receiveWriteRequestPc+0x118<span class="o">)</span>: undefined reference to <span class="sb">`</span>getSignals<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">cantranslator.cpp:(.text._Z19receiveWriteRequestPc+0x120): undefined reference to `getSignalCount()&#39;</span>
-build-cli/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>initializeAllCan<span class="o">()</span><span class="s1">&#39;:</span>
-<span class="s1">cantranslator.cpp:(.text._Z16initializeAllCanv+0x1c): undefined reference to `getCanBuses()&#39;</span>
-cantranslator.cpp:<span class="o">(</span>.text._Z16initializeAllCanv+0x30<span class="o">)</span>: undefined reference to <span class="sb">`</span>getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">build-cli/cantranslator.o: In function `_ZL17customUSBCallback9USB_EVENTPvj.clone.0&#39;</span>:
-cantranslator.cpp:<span class="o">(</span>.text._ZL17customUSBCallback9USB_EVENTPvj.clone.0+0x70<span class="o">)</span>: undefined reference to <span class="sb">`</span>getMessageSet<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">cantranslator.cpp:(.text._ZL17customUSBCallback9USB_EVENTPvj.clone.0+0x98): undefined reference to `getMessageSet()&#39;</span>
-build-cli/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>receiveCan<span class="o">(</span>CanBus*<span class="o">)</span><span class="s1">&#39;:</span>
-<span class="s1">cantranslator.cpp:(.text._Z10receiveCanP6CanBus+0x40): undefined reference to `decodeCanMessage(int, unsigned char*)&#39;</span>
-build-cli/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>loop<span class="s1">&#39;:</span>
-<span class="s1">cantranslator.cpp:(.text.loop+0x1c): undefined reference to `getCanBuses()&#39;</span>
-cantranslator.cpp:<span class="o">(</span>.text.loop+0x30<span class="o">)</span>: undefined reference to <span class="sb">`</span>getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
-<span class="s1">collect2: ld returned 1 exit status</span>
-<span class="s1">make[1]: *** [build-cli/cantranslator.elf] Error 1</span>
-<span class="s1">make[1]: Leaving directory `/home/cantranslator/cantranslator&#39;</span>
-make: *** <span class="o">[</span>all<span class="o">]</span> Error 2
-</pre></div>
-</div>
 <p>The open source repository does not include the implementation of the functions
 declared in <tt class="docutils literal"><span class="pre">signals.h</span></tt> and these are required to compile and program a CAN
 transaltor. These functions are dependent on the specific vehicle and message
 set, which is often proprietary information to the automaker.</p>
-<p>You have three options to get a working CAN translator:</p>
+<p>Once the libraries are installed and you run <tt class="docutils literal"><span class="pre">make</span></tt>, you&#8217;ll notice that it
+won&#8217;t compile - you&#8217;ll get a bunch of errors about undefined references to
+functions from <tt class="docutils literal"><span class="pre">signals.h</span></tt>:</p>
+<div class="highlight-sh"><div class="highlight"><pre>build/pic32/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>updateDataLights<span class="o">()</span><span class="s1">&#39;:</span>
+<span class="s1">cantranslator.cpp:(.text._Z16updateDataLightsv+0x20): undefined reference to `openxc::signals::getCanBusCount()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text._Z16updateDataLightsv+0x48<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text._Z16updateDataLightsv+0xd4): undefined reference to `openxc::signals::getCanBuses()&#39;</span>
+build/pic32/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>initializeAllCan<span class="o">()</span><span class="s1">&#39;:</span>
+<span class="s1">cantranslator.cpp:(.text._Z16initializeAllCanv+0x1c): undefined reference to `openxc::signals::getCanBuses()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text._Z16initializeAllCanv+0x30<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">build/pic32/cantranslator.o: In function `setup&#39;</span>:
+cantranslator.cpp:<span class="o">(</span>.text.setup+0x14<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::initialize<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">build/pic32/cantranslator.o: In function `receiveRawWriteRequest(cJSON*, cJSON*)&#39;</span>:
+cantranslator.cpp:<span class="o">(</span>.text._Z22receiveRawWriteRequestP5cJSONS0_+0x3c<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBuses<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">build/pic32/cantranslator.o: In function `receiveTranslatedWriteRequest(cJSON*, cJSON*)&#39;</span>:
+cantranslator.cpp:<span class="o">(</span>.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x44<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getSignals<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x4c): undefined reference to `openxc::signals::getSignalCount()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x78<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getSignals<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x80): undefined reference to `openxc::signals::getSignalCount()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0xe4<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCommands<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0xec): undefined reference to `openxc::signals::getCommandCount()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x10c<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getSignals<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text._Z29receiveTranslatedWriteRequestP5cJSONS0_+0x114): undefined reference to `openxc::signals::getSignalCount()&#39;</span>
+build/pic32/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>receiveCan<span class="o">(</span>openxc::pipeline::Pipeline*, CanBus*<span class="o">)</span><span class="s1">&#39;:</span>
+<span class="s1">cantranslator.cpp:(.text._Z10receiveCanPN6openxc8pipeline8PipelineEP6CanBus+0x54): undefined reference to `openxc::signals::decodeCanMessage(openxc::pipeline::Pipeline*, CanBus*, int, unsigned long long)&#39;</span>
+build/pic32/cantranslator.o: In <span class="k">function</span> <span class="sb">`</span>loop<span class="s1">&#39;:</span>
+<span class="s1">cantranslator.cpp:(.text.loop+0x2c): undefined reference to `openxc::signals::getCanBuses()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text.loop+0x44<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text.loop+0x90): undefined reference to `openxc::signals::getCanBuses()&#39;</span>
+cantranslator.cpp:<span class="o">(</span>.text.loop+0xa4<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBusCount<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">cantranslator.cpp:(.text.loop+0xd4): undefined reference to `openxc::signals::loop()&#39;</span>
+build/pic32/main.o: In <span class="k">function</span> <span class="sb">`</span>main<span class="s1">&#39;:</span>
+<span class="s1">main.cpp:(.text.main+0x60): undefined reference to `openxc::signals::getActiveMessageSet()&#39;</span>
+build/pic32/main.o: In <span class="k">function</span> <span class="sb">`</span>handleControlRequest<span class="o">(</span>unsigned char<span class="o">)</span><span class="s1">&#39;:</span>
+<span class="s1">main.cpp:(.text._Z20handleControlRequesth+0x64): undefined reference to `openxc::signals::getActiveMessageSet()&#39;</span>
+main.cpp:<span class="o">(</span>.text._Z20handleControlRequesth+0x8c<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getActiveMessageSet<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">build/pic32/platform/pic32/canutil.o: In function `openxc::can::initialize(CanBus*)&#39;</span>:
+canutil.cpp:<span class="o">(</span>.text._ZN6openxc3can10initializeEP6CanBus+0xbc<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::initializeFilters<span class="o">(</span>unsigned long long, int*<span class="o">)</span><span class="s1">&#39;</span>
+<span class="s1">build/pic32/platform/platform.o: In function `openxc::platform::suspend(openxc::pipeline::Pipeline*)&#39;</span>:
+platform.cpp:<span class="o">(</span>.text._ZN6openxc8platform7suspendEPNS_8pipeline8PipelineE+0x3c<span class="o">)</span>: undefined reference to <span class="sb">`</span>openxc::signals::getCanBuses<span class="o">()</span><span class="s1">&#39;</span>
+<span class="s1">platform.cpp:(.text._ZN6openxc8platform7suspendEPNS_8pipeline8PipelineE+0x50): undefined reference to `openxc::signals::getCanBusCount()&#39;</span>
+collect2: ld returned 1 <span class="nb">exit </span>status
+make: *** <span class="o">[</span>build/pic32/cantranslator-pic32.elf<span class="o">]</span> Error
+</pre></div>
+</div>
+<p>You have three options to get a working vehicle interface:</p>
 <ul class="simple">
-<li>Implement the functions manually if you know the CAN message formats</li>
-<li>Create a <a class="reference internal" href="mappings.html"><em>CAN message mapping</em></a> and use the scripts to
-auto-generate signals.cpp. Knowledge of the vehicle&#8217;s CAN message is also
-required for this method.</li>
-<li>Use a <a class="reference internal" href="../installation/binary.html"><em>pre-built binary firmware</em></a> from an automaker.</li>
+<li>Use a <a class="reference internal" href="../installation/binary.html"><em>pre-built binary firmware</em></a> from an automaker</li>
+<li>Create a <a class="reference internal" href="mappings.html"><em>JSON message mapping</em></a> and use the provided scripts
+to auto-generate an implementation of <tt class="docutils literal"><span class="pre">signals.h</span></tt>. Knowledge of the vehicle&#8217;s
+CAN message is also required for this method.</li>
+<li>Implement the <tt class="docutils literal"><span class="pre">signals.h</span></tt> functions manually</li>
 </ul>
-<div class="section" id="manual">
-<h2>Manual<a class="headerlink" href="#manual" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="auto-generated-from-mapping">
+<h2>Auto-generated from Mapping<a class="headerlink" href="#auto-generated-from-mapping" title="Permalink to this headline">¶</a></h2>
+<p>The code auto-generation script accepts a <a class="reference internal" href="mappings.html"><em>JSON input file</em></a> that
+defines the CAN buses, message and signals of interest and outputs an
+implementation of the <tt class="docutils literal"><span class="pre">signals.h</span></tt> functions that can understand and translate
+that vehicle data. This is the recommended approach if you have custom CAN
+messages - it&#8217;s much nicer than implementing a <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> file by hand.</p>
+<p>You must know the CAN message formats of the vehicle you want to use with the
+vehicle interface, as you cannot create these input files without that
+knowledge.</p>
+<p>Once you&#8217;ve defined your message set in a JSON file, run the
+<tt class="docutils literal"><span class="pre">generate_code.py</span></tt> script to create an implementation of <tt class="docutils literal"><span class="pre">signals.cpp</span></tt>:</p>
+<div class="highlight-sh"><div class="highlight"><pre>cantranslator/ <span class="nv">$ </span>script/generator/generate_code.py --message-set mycar.json &gt; src/signals.cpp
+</pre></div>
+</div>
+<p>The firmware should now <a class="reference internal" href="../installation/compiling.html"><em>compile</em></a>! Don&#8217;t modify
+the <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> file manually, since it&#8217;s generated you should expect it to
+be wiped and recreated at any time. Always make changes to the JSON instead.</p>
+</div>
+<div class="section" id="manual-implementation">
+<h2>Manual Implementation<a class="headerlink" href="#manual-implementation" title="Permalink to this headline">¶</a></h2>
 <p>You must implement the functions defined in the <tt class="docutils literal"><span class="pre">signals.h</span></tt> header
 file. The documentation of those functions describes the expected effect
 of each. Implement these in a file called <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> and the code
 should now compile.</p>
-<p>You must know the CAN message formats of the vehicle you want to use
-with the CAN translator, as you cannot implement these functions without
-that knowledge.</p>
-</div>
-<div class="section" id="auto-generated-from-mapping">
-<h2>Auto-generated from Mapping<a class="headerlink" href="#auto-generated-from-mapping" title="Permalink to this headline">¶</a></h2>
-<p>The code auto-generation script accepts a special <a class="reference internal" href="mappings.html"><em>JSON input file</em></a> that defines the CAN messages and signals of interest and rewrites
-it as C data structures, ready to be downloaded to the device. You must know the
-CAN message formats of the vehicle you want to use with the CAN translator, as
-you cannot create these input files without that knowledge.</p>
-<p>Once you have one or more input JSON files, run the <tt class="docutils literal"><span class="pre">generate_source.py</span></tt>
-script to create a complete implementation of <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> for your messages.
-For example, if your mappings are in <tt class="docutils literal"><span class="pre">signals.json</span></tt>:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="nv">$ </span>script/generate_code.py --json signals.json &gt; signals.cpp
-</pre></div>
-</div>
-<p>If you used the <tt class="docutils literal"><span class="pre">xml_to_json.py</span></tt> script to convert an XML CAN database to
-JSON, make sure to provide both the converted file along with your mappings:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="nv">$ </span>script/generate_code.py --json signals.json --json mappings.json &gt; signals.cpp
-</pre></div>
-</div>
-<p>Drop the new <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> file in the <tt class="docutils literal"><span class="pre">src</span></tt> folder, and it should now
-<a class="reference internal" href="../installation/compiling.html"><em>compile</em></a>. Don&#8217;t add anything else to this file -
-it&#8217;s derivative of the master JSON, and should be able to be wiped and recreated
-at any time.</p>
-<p>If you have multiple CAN buses and want to define their signals and
-messages in separate files, just pass multiple JSON files:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="nv">$ </span>script/generate_code.py --json highspeed.json --json mediumspeed.json &gt; signals.cpp
-</pre></div>
-</div>
-<p>Note that the JSON files are parsed and merged, so if you want to define
-custom handlers and states separately from the signal definition itself,
-you can store them in separate files and they will be merged on import.</p>
+<p>You must know the CAN message formats of the vehicle you want to use with the
+vehicle interface, as you cannot implement these functions without that
+knowledge.</p>
 </div>
 </div>
 
@@ -148,8 +148,8 @@ you can store them in separate files and they will be merged on import.</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">CAN Message Definition</a><ul>
-<li><a class="reference internal" href="#manual">Manual</a></li>
 <li><a class="reference internal" href="#auto-generated-from-mapping">Auto-generated from Mapping</a></li>
+<li><a class="reference internal" href="#manual-implementation">Manual Implementation</a></li>
 </ul>
 </li>
 </ul>
@@ -194,12 +194,12 @@ you can store them in separate files and they will be merged on import.</p>
         <li class="right" >
           <a href="../platforms/max32.html" title="Digilent chipKIT Max32"
              >previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 3.3-dev documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Christopher Peplin.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>
