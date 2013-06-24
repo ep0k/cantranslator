@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -80,7 +82,7 @@ parent(s) to the <tt class="docutils literal"><span class="pre">parents</span></
 <h2>Initializers<a class="headerlink" href="#initializers" title="Permalink to this headline">¶</a></h2>
 <p>The key <tt class="docutils literal"><span class="pre">initializers</span></tt> should have as its value an array of strings. Each
 string should be the name of a function with the type signature:</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">function</span><span class="p">();</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="n">function</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>These functions will be called once at the beginning of execution, before
@@ -90,7 +92,7 @@ reading any CAN messages.</p>
 <h2>Loopers<a class="headerlink" href="#loopers" title="Permalink to this headline">¶</a></h2>
 <p>The key <tt class="docutils literal"><span class="pre">loopers</span></tt> should have as its value an array of strings. Each
 string should be the name of a function with the type signature:</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">function</span><span class="p">();</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="n">function</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>These functions will be called once each time through the main loop function,
@@ -140,7 +142,7 @@ message and all its signals will be left out of the generated source code.</p>
 entire message to combine multiple signals into a single value (or any
 other arbitrary processing). You can generate 0, 1 or many translated
 messages from one call to your handler function.</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">handleSteeringWheelMessage</span><span class="p">(</span><span class="kt">int</span> <span class="n">messageId</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">data</span><span class="p">,</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="n">handleSteeringWheelMessage</span><span class="p">(</span><span class="kt">int</span> <span class="n">messageId</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">data</span><span class="p">,</span>
         <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span> <span class="n">Pipeline</span><span class="o">*</span> <span class="n">pipeline</span><span class="p">);</span>
     <span class="kt">float</span> <span class="n">steeringWheelAngle</span> <span class="o">=</span> <span class="n">decodeCanSignal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">signals</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">);</span>
     <span class="kt">float</span> <span class="n">steeringWheelSign</span> <span class="o">=</span> <span class="n">decodeCanSignal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">signals</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">);</span>
@@ -255,7 +257,7 @@ attribute for the steering wheel angle signal to
 a separate <tt class="docutils literal"><span class="pre">.cpp</span></tt> file and then add that filename to the <tt class="docutils literal"><span class="pre">extra_sources</span></tt>
 field):</p>
 <div class="highlight-c"><div class="highlight"><pre><span class="kt">float</span> <span class="nf">handleSteeringWheelAngle</span><span class="p">(</span><span class="n">CanSignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span>
-        <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span> <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="kt">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span> <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="n">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">signal</span><span class="o">-&gt;</span><span class="n">lastValue</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// left turn</span>
         <span class="n">value</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -266,14 +268,14 @@ field):</p>
 </div>
 <p>The valid return types for value handlers are <tt class="docutils literal"><span class="pre">bool</span></tt>, <tt class="docutils literal"><span class="pre">float</span></tt> and
 <tt class="docutils literal"><span class="pre">char*</span></tt> - the function prototype must match one of:</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="kt">char</span><span class="o">*</span> <span class="nf">customHandler</span><span class="p">(</span><span class="n">CanSignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
-        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="kt">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">char</span><span class="o">*</span> <span class="n">customHandler</span><span class="p">(</span><span class="n">CanSignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
+        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="n">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
 
-<span class="kt">float</span> <span class="nf">customHandler</span><span class="p">(</span><span class="n">CanSignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
-        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="kt">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">customHandler</span><span class="p">(</span><span class="n">CanSignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
+        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="n">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
 
-<span class="kt">bool</span> <span class="nf">customhandler</span><span class="p">(</span><span class="n">cansignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">cansignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
-        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="kt">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
+<span class="n">bool</span> <span class="n">customhandler</span><span class="p">(</span><span class="n">cansignal</span><span class="o">*</span> <span class="n">signal</span><span class="p">,</span> <span class="n">cansignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">,</span>
+        <span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="n">bool</span><span class="o">*</span> <span class="n">send</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>where <tt class="docutils literal"><span class="pre">signal</span></tt> is a pointer to the <tt class="docutils literal"><span class="pre">CanSignal</span></tt> this is handling,
@@ -361,7 +363,7 @@ will be excluded from the generated source code.</p>
 <tt class="docutils literal"><span class="pre">CommandHandler</span></tt> function prototype from <tt class="docutils literal"><span class="pre">canutil.h</span></tt>) that should
 be called when the named command arrives over the translated VI interface (e.g.
 USB or Bluetooth).</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">CommandHandler</span><span class="p">)(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="n">cJSON</span><span class="o">*</span> <span class="n">value</span><span class="p">,</span> <span class="n">cJSON</span><span class="o">*</span> <span class="n">event</span><span class="p">,</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">CommandHandler</span><span class="p">)(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">,</span> <span class="n">cJSON</span><span class="o">*</span> <span class="n">value</span><span class="p">,</span> <span class="n">cJSON</span><span class="o">*</span> <span class="n">event</span><span class="p">,</span>
         <span class="n">CanSignal</span><span class="o">*</span> <span class="n">signals</span><span class="p">,</span> <span class="kt">int</span> <span class="n">signalCount</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -479,7 +481,7 @@ up until now is the pull data from DBC files).</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Christopher Peplin.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
