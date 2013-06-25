@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CrossChasm C5 Interface &mdash; OpenXC CAN Translator 4.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="OpenXC CAN Translator 4.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Supported Platforms" href="platforms.html" />
+    <link rel="next" title="Ford Prototype Vehicle Interface" href="ford.html" />
+    <link rel="prev" title="NGX Blueboard LPC1768-H" href="blueboard.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ford.html" title="Ford Prototype Vehicle Interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="blueboard.html" title="NGX Blueboard LPC1768-H"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">OpenXC CAN Translator 4.0.1 documentation</a> &raquo;</li>
+          <li><a href="platforms.html" accesskey="U">Supported Platforms</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="crosschasm-c5-interface">
+<h1>CrossChasm C5 Interface<a class="headerlink" href="#crosschasm-c5-interface" title="Permalink to this headline">¶</a></h1>
+<p>CrossChasm&#8217;s C5 OBD interface is compatible with the OpenXC cantranslator
+firmware. To build for the C5, compile with the flag <tt class="docutils literal"><span class="pre">PLATFORM=CROSSCHASM_C5</span></tt>.</p>
+<p>CrossChasm has made the C5 [available for
+purchase](<a class="reference external" href="http://crosschasm.com/SolutionCenter/OpenXC.aspx">http://crosschasm.com/SolutionCenter/OpenXC.aspx</a>) from their website,
+and it comes pre-loaded with the correct bootloader, so you don&#8217;t need any
+additional hardware to load the OpenXC firmware.</p>
+<div class="section" id="flashing-a-pre-compiled-firmware">
+<h2>Flashing a Pre-compiled Firmware<a class="headerlink" href="#flashing-a-pre-compiled-firmware" title="Permalink to this headline">¶</a></h2>
+<p>Assuming your C5 has the <a class="reference internal" href="#bootloader"><em>bootloader</em></a> already flashed, once
+you have the USB cable attached to your computer and to the C5, follow the same
+steps to upload as for the <a class="reference internal" href="max32.html"><em>chipKIT Max32</em></a>.</p>
+<p>The C5 units offered directly from the [CrossChasm
+website](<a class="reference external" href="http://crosschasm.com/SolutionCenter/OpenXC.aspx">http://crosschasm.com/SolutionCenter/OpenXC.aspx</a>) are pre-programmed
+with the bootloader.</p>
+</div>
+<div class="section" id="bootloader">
+<span id="id1"></span><h2>Bootloader<a class="headerlink" href="#bootloader" title="Permalink to this headline">¶</a></h2>
+<p>The C5 can be flashed with the same <a class="reference external" href="https://github.com/openxc/PIC32-avrdude-bootloader">PIC32 avrdude bootloader</a>, as the chipKIT.</p>
+<p>The OpenXC fork (the previous link) defines a <cite>CROSSCHASM_C5</cite> configuration that
+works as a USB bootloader for this unit. Once the bootloader is flashed, there
+is a 5 second window when the unit powers on when it listens for avrdude
+commands via a CDC modem interface exposed over USB (e.g. in Linux it may show
+up as something like <cite>/dev/ACM0</cite>, and you can treat this just as if it were a
+serial device).</p>
+<p>The C5 units offered directly from the [CrossChasm
+website](<a class="reference external" href="http://crosschasm.com/SolutionCenter/OpenXC.aspx">http://crosschasm.com/SolutionCenter/OpenXC.aspx</a>) are pre-programmed
+with the bootloader.</p>
+<p>If you need to reflash the bootloader yourself, a ready-to-go .hex file is
+available in the [GitHub
+repository](<a class="reference external" href="https://raw.github.com/openxc/PIC32-avrdude-bootloader/master/bootloaders/CrossChasm-C5-USB.hex">https://raw.github.com/openxc/PIC32-avrdude-bootloader/master/bootloaders/CrossChasm-C5-USB.hex</a>)
+and you can flash it with MPLAB IDE/IPE and an ICSP programmer like the
+Microchip PICkit 3. You can also build it from source in MPLAB by using the
+<cite>CrossChasm C5</cite> configuration.</p>
+</div>
+<div class="section" id="compiling">
+<h2>Compiling<a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h2>
+<p>The instructions for compiling from source are identical to the <a class="reference internal" href="max32.html"><em>chipKIT
+Max32</em></a> except that <tt class="docutils literal"><span class="pre">PLATFORM=CROSSCHASM_C5</span></tt> instead of <tt class="docutils literal"><span class="pre">CHIPKIT</span></tt>.</p>
+<p>If you will not be using the avrdude bootloader and will be flashing directly
+via ICSP, make sure to also compile with <tt class="docutils literal"><span class="pre">BOOTLOADER=0</span></tt> to enable the program
+to run on bare metal.</p>
+</div>
+<div class="section" id="usb">
+<h2>USB<a class="headerlink" href="#usb" title="Permalink to this headline">¶</a></h2>
+<p>The micro-USB port on the board is used to send and receive OpenXC messages.</p>
+</div>
+<div class="section" id="uart">
+<h2>UART<a class="headerlink" href="#uart" title="Permalink to this headline">¶</a></h2>
+<p>On the C5, <tt class="docutils literal"><span class="pre">UART1A</span></tt> is used for OpenXC output at the 230000 baud rate.
+Hardware flow control (RTS/CTS) is enabled, so CTS must be pulled low by the
+receiving device before data will be sent.</p>
+<p>TODO add pinout of expansion header, probably a picture</p>
+<p>UART data is sent only if pin 0.58 (or PORTB BIT 4, RB4) is pulled high (to
+5vv). If you are using a Bluetooth module like the <a class="reference external" href="https://www.sparkfun.com/products/10269">BlueSMiRF</a> from SparkFun, you need to hard-wire
+5v into this pin to actually enabling UART. To disable UART, pull this pin low
+or leave it floating.</p>
+</div>
+<div class="section" id="debug-logging">
+<h2>Debug Logging<a class="headerlink" href="#debug-logging" title="Permalink to this headline">¶</a></h2>
+<p>On the C5, logging is on UART3A at 115200 baud (if the firmware was compiled
+with <tt class="docutils literal"><span class="pre">DEBUG=1</span></tt>).</p>
+</div>
+<div class="section" id="led-lights">
+<h2>LED Lights<a class="headerlink" href="#led-lights" title="Permalink to this headline">¶</a></h2>
+<p>The C5 has 2 user controllable LEDs. When CAN activity is detected, the green
+LED will be enabled. When USB or Bluetooth is connected, the blue LED will be
+enabled.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CrossChasm C5 Interface</a><ul>
+<li><a class="reference internal" href="#flashing-a-pre-compiled-firmware">Flashing a Pre-compiled Firmware</a></li>
+<li><a class="reference internal" href="#bootloader">Bootloader</a></li>
+<li><a class="reference internal" href="#compiling">Compiling</a></li>
+<li><a class="reference internal" href="#usb">USB</a></li>
+<li><a class="reference internal" href="#uart">UART</a></li>
+<li><a class="reference internal" href="#debug-logging">Debug Logging</a></li>
+<li><a class="reference internal" href="#led-lights">LED Lights</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="blueboard.html"
+                        title="previous chapter">NGX Blueboard LPC1768-H</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ford.html"
+                        title="next chapter">Ford Prototype Vehicle Interface</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/platforms/crosschasm-c5.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ford.html" title="Ford Prototype Vehicle Interface"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="blueboard.html" title="NGX Blueboard LPC1768-H"
+             >previous</a> |</li>
+        <li><a href="../index.html">OpenXC CAN Translator 4.0.1 documentation</a> &raquo;</li>
+          <li><a href="platforms.html" >Supported Platforms</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Christopher Peplin.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

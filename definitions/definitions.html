@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CAN Message Definition &mdash; OpenXC CAN Translator 4.0 documentation</title>
+    <title>CAN Message Definition &mdash; OpenXC CAN Translator 4.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '4.0',
+        VERSION:     '4.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +23,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="OpenXC CAN Translator 4.0 documentation" href="../index.html" />
-    <link rel="next" title="JSON Mapping Format" href="mappings.html" />
+    <link rel="top" title="OpenXC CAN Translator 4.0.1 documentation" href="../index.html" />
+    <link rel="next" title="UART Output" href="../output/uart.html" />
     <link rel="prev" title="Digilent chipKIT Max32" href="../platforms/max32.html" /> 
   </head>
   <body>
@@ -37,12 +35,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="mappings.html" title="JSON Mapping Format"
+          <a href="../output/uart.html" title="UART Output"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../platforms/max32.html" title="Digilent chipKIT Max32"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -105,29 +103,25 @@ make: *** <span class="o">[</span>build/pic32/cantranslator-pic32.elf<span class
 <p>You have three options to get a working vehicle interface:</p>
 <ul class="simple">
 <li>Use a <a class="reference internal" href="../installation/binary.html"><em>pre-built binary firmware</em></a> from an automaker</li>
-<li>Create a <a class="reference internal" href="mappings.html"><em>JSON message mapping</em></a> and use the provided scripts
-to auto-generate an implementation of <tt class="docutils literal"><span class="pre">signals.h</span></tt>. Knowledge of the vehicle&#8217;s
-CAN message is also required for this method.</li>
+<li>Create a message set mapping and use the <a class="reference external" href="http://python.openxcplatform.com">OpenXC Python library</a> to auto-generate an implementation of
+<tt class="docutils literal"><span class="pre">signals.h</span></tt>. Knowledge of the vehicle&#8217;s CAN message is required for this
+method.</li>
 <li>Implement the <tt class="docutils literal"><span class="pre">signals.h</span></tt> functions manually</li>
 </ul>
 <div class="section" id="auto-generated-from-mapping">
 <h2>Auto-generated from Mapping<a class="headerlink" href="#auto-generated-from-mapping" title="Permalink to this headline">¶</a></h2>
-<p>The code auto-generation script accepts a <a class="reference internal" href="mappings.html"><em>JSON input file</em></a> that
-defines the CAN buses, message and signals of interest and outputs an
-implementation of the <tt class="docutils literal"><span class="pre">signals.h</span></tt> functions that can understand and translate
-that vehicle data. This is the recommended approach if you have custom CAN
-messages - it&#8217;s much nicer than implementing a <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> file by hand.</p>
-<p>You must know the CAN message formats of the vehicle you want to use with the
-vehicle interface, as you cannot create these input files without that
-knowledge.</p>
-<p>Once you&#8217;ve defined your message set in a JSON file, run the
-<tt class="docutils literal"><span class="pre">generate_code.py</span></tt> script to create an implementation of <tt class="docutils literal"><span class="pre">signals.cpp</span></tt>:</p>
-<div class="highlight-sh"><div class="highlight"><pre>cantranslator/ <span class="nv">$ </span>script/generator/generate_code.py --message-set mycar.json &gt; src/signals.cpp
+<p>The code generation tools are documented in the <a class="reference external" href="http://python.openxcplatform.com/code-generation.html">code generation input
+definitions</a>.</p>
+<p>Once you&#8217;ve defined your message set in a JSON file, install the <a class="reference external" href="http://python.openxcplatform.com">OpenXC Python
+library</a>, then run the
+<cite>openxc-generate-firmware-code</cite> tool to create an implementation of
+<tt class="docutils literal"><span class="pre">signals.cpp</span></tt>:</p>
+<div class="highlight-sh"><div class="highlight"><pre>cantranslator/ <span class="nv">$ </span>openxc-generate-firmware-code --message-set mycar.json &gt; src/signals.cpp
 </pre></div>
 </div>
 <p>The firmware should now <a class="reference internal" href="../installation/compiling.html"><em>compile</em></a>! Don&#8217;t modify
 the <tt class="docutils literal"><span class="pre">signals.cpp</span></tt> file manually, since it&#8217;s generated you should expect it to
-be wiped and recreated at any time. Always make changes to the JSON instead.</p>
+be wiped and recreated at any time; always make changes to the JSON instead.</p>
 </div>
 <div class="section" id="manual-implementation">
 <h2>Manual Implementation<a class="headerlink" href="#manual-implementation" title="Permalink to this headline">¶</a></h2>
@@ -160,8 +154,8 @@ knowledge.</p>
   <p class="topless"><a href="../platforms/max32.html"
                         title="previous chapter">Digilent chipKIT Max32</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="mappings.html"
-                        title="next chapter">JSON Mapping Format</a></p>
+  <p class="topless"><a href="../output/uart.html"
+                        title="next chapter">UART Output</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/definitions/definitions.txt"
@@ -191,17 +185,17 @@ knowledge.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="mappings.html" title="JSON Mapping Format"
+          <a href="../output/uart.html" title="UART Output"
              >next</a> |</li>
         <li class="right" >
           <a href="../platforms/max32.html" title="Digilent chipKIT Max32"
              >previous</a> |</li>
-        <li><a href="../index.html">OpenXC CAN Translator 4.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">OpenXC CAN Translator 4.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Christopher Peplin.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>
